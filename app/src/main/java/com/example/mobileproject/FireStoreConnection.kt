@@ -2,25 +2,22 @@ package com.example.mobileproject
 
 import android.util.Log
 import android.widget.Toast
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.QuerySnapshot
-import com.google.firebase.storage.FirebaseStorage
-import java.text.SimpleDateFormat
-import java.util.Locale
 
 open class FireStoreConnection {
     companion object {
-        private val db: FirebaseFirestore
-        private val storage: FirebaseStorage
-
+        //private val db: FirebaseFirestore
+        //private val storage: FirebaseStorage
+/*
         init {
             Log.d("fseffes", "00000")
-            db = FirebaseFirestore.getInstance()
-            storage = FirebaseStorage.getInstance()
+            //db = FirebaseFirestore.getInstance()
+            //storage = FirebaseStorage.getInstance()
         }
 
-        /*
+
     //    open inline fun <reified T>  getDocument(list : List<T>,route:String){
     //        db.collection(route)
     //            .get()
@@ -37,16 +34,51 @@ open class FireStoreConnection {
     //    }
 
          */
-        open fun getDocuments(collectionRoute: String): List<DocumentSnapshot>? {
-            var temp: List<DocumentSnapshot>? = null
-            db.collection(collectionRoute)
+        open fun onGetCollection(collection: String,callBack:(documents:List<DocumentSnapshot>)->Unit) {
+            val db=FirebaseFirestore.getInstance()
+            db.collection(collection)
                 .get()
                 .addOnSuccessListener { result ->
                     Log.d("fgurhguhr","gooooooooood")
-                    temp=result.documents
+                    callBack(result.documents)
                     Log.d("fgurhguhr","gooooooooood")
                 }
-            return temp
         }
+        open fun onGetDocument(documentPath:String,callBack:(document:DocumentSnapshot)->Unit)
+        {
+            Log.d("onGetDocument",documentPath)
+            val db=FirebaseFirestore.getInstance()
+            db.document(documentPath)
+                .get()
+                .addOnSuccessListener {
+                    document->
+                    if(document.exists())//만약 문서가 존재하면
+                    {
+                        callBack(document)
+                    }
+                    else
+                    {
+                        Log.d("onGetDocument","failure")
+                    }
+                }
+        }
+
+        //성공여부를 담아보내주는 콜백이 매개변수로 있음.
+        open fun addDocument(collection: String,post:Any,
+                             isCompleted:(success:Boolean,docPath:String)->Unit)
+        {
+            val db=FirebaseFirestore.getInstance()
+            db.collection(collection)
+                .add(post)
+                .addOnSuccessListener {
+                    documentReference->
+
+                    isCompleted(true,documentReference.path)
+                }
+                .addOnFailureListener {
+                    isCompleted(false,"")
+                }
+        }
+
     }
 }

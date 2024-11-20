@@ -2,6 +2,7 @@ package com.example.mobileproject
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -10,43 +11,63 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.mobileproject.databinding.ActivityPostBinding
 import com.example.mobileproject.Post
+import com.google.firebase.firestore.FirebaseFirestore
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class PostActivity : AppCompatActivity() {
 
     private lateinit var postTitle: TextView
+    private lateinit var postDate: TextView
+    private lateinit var postAuther: TextView
     private lateinit var postContent: TextView
+    private lateinit var postImage: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding=ActivityPostBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        Log.d("sex","hhhhhhhhhhhhhhhhhhhhhhhh");
         postTitle = binding.postTitle
+        postDate = binding.postDate
+        postAuther = binding.postAuther
         postContent = binding.postContent
+        postImage = binding.postImageView
 
         // 인텐트를 통해 받은 데이터 표시
-        val title = intent.getStringExtra("postTitle")
-        val content = intent.getStringExtra("postContent")
+        val postPath = intent.getStringExtra("postPath")
+        // 받은 게시글 경로가 null이면 종료.
+        if(postPath == null){
+            Log.d("dfdf","불러오기에 실패함5.")
+            finish()
+        }
+        //게시물경로로 게시물(post객체)받아오기
+        FireStoreConnection.onGetDocument(postPath!!){
+            document ->
+            val post:Post?=document.toObject(Post::class.java)
 
-        postTitle.text = title
-        postContent.text = content
+            if(post == null)//게시글을 받아와도 안에든게 없으면 종료.
+            {
+                Log.d("dfdf", "불러오기에 실패함t=8.")
+                finish()
+            }
+            //post 객체안의 데이터를 뺴내어 화면에 표시하기.
+            postTitle.text = post?.title?:""
+            postDate.text = post?.title?:""
+            postAuther.text = post?.author?:""
+            postContent.text = post?.content?:""
+            // postListItem안에 있는 Timestamp를 date로 변환해 표기하기
+            val date = Date(post?.timestamp?:0)
+            // 날짜 포맷 설정
+            //val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+            val dateFormat = SimpleDateFormat("MM-dd HH:mm:ss", Locale.getDefault())
+            val formattedDate = dateFormat.format(date)
+            postDate.text=formattedDate
+        }
+
 
        Log.d("dfdf","불러오기에 실패함3.")
-        val documents=
-            FireStoreConnection.getDocuments("posts")
-
-        if(documents == null)Log.d("dfdf","불러오기에 실패함2.")
-        for(document in documents!!){
-            var post= document.toObject(Post::class.java)
-            if(post!=null){
-                postTitle.text = post.title
-                postContent.text=post.author
-            }
-            else{
-                Log.d("dfdf","불러오기에 실패함.")
-            }
-
-        }
     }
 
 }

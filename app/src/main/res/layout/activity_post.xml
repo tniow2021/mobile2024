@@ -12,10 +12,27 @@
         android:textSize="24sp"
         android:textStyle="bold"
         android:layout_marginBottom="16dp" />
-
+    <TextView
+        android:id="@+id/postDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp" />
+    <TextView
+        android:id="@+id/postAuther"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp" />
     <TextView
         android:id="@+id/postContent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="18sp" />
+    <ImageView
+        android:id="@+id/postImageView"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center"
+        android:src="@android:drawable/ic_menu_gallery"
+        android:contentDescription="선택한 이미지" />
 </LinearLayout>

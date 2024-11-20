@@ -19,7 +19,7 @@
             android:name=".Post"
             android:exported="false" />
         <activity
-            android:name=".Board"
+            android:name=".BoardActivity"
             android:exported="false" />
         <activity
             android:name=".CreatePost"

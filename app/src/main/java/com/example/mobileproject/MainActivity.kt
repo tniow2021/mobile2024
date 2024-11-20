@@ -3,14 +3,12 @@ package com.example.mobileproject
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.activity.ComponentActivity
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.example.mobileproject.databinding.ActivityMainBinding
-
-
+/*
+project structure에서 안드로이드 API를 35로 설정
+뷰바인딩 설정
+ */
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         val binding= ActivityMainBinding.inflate(layoutInflater)
@@ -20,14 +18,14 @@ class MainActivity : AppCompatActivity() {
 
         //메인화면에 있는 '게시판 가기' 버튼
         binding.goBoardBtn.setOnClickListener{
-            Log.d("fffe","EFfe");
-            var myintent= Intent(applicationContext,Board::class.java)
+            var myintent= Intent(applicationContext,BoardActivity::class.java)
+            myintent.putExtra("boardPath","boards/boardInfo/board1")
             startActivity(myintent)
         }
         //메인화면에 있는 '게시글 쓰기' 버튼
         binding.createPost.setOnClickListener{
-            Log.d("fffe","EFf3443e");
             var myintent= Intent(applicationContext,CreatePost::class.java)
+            myintent.putExtra("boardPath","boards/boardInfo/board1")
             startActivity(myintent)
         }
 
