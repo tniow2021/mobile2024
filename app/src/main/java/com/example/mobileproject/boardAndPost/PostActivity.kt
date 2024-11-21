@@ -22,14 +22,10 @@ class PostActivity : AppCompatActivity() {
     private lateinit var postContent: TextView
     private lateinit var postImage: ImageView
 
-    companion object{
-
-    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding=ActivityPostBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        Log.d("sex","hhhhhhhhhhhhhhhhhhhhhhhh");
         postTitle = binding.postTitle
         postDate = binding.postDate
         postAuther = binding.postAuther
@@ -66,33 +62,15 @@ class PostActivity : AppCompatActivity() {
             postDate.text = formattedDate
 
 
-            // 이미지
-            /*
-            if (post?.imagePath != null) {
-                // Firebase Storage 참조
-                val storageReference = FirebaseStorage.getInstance().reference
-
-                // 이미지 경로 설정 imagePath는 파이어스토리지상의 경로
-                val imageRef = storageReference.child(post.imagePath!!)
-
-                // 이미지의 다운로드 URL 가져오기
-                imageRef.downloadUrl.addOnSuccessListener { uri ->
-                    // Glide를 사용하여 ImageView에 이미지 로드
-                    Glide.with(this)
-                        .load(uri)  // Firebase에서 받은 다운로드 URL 사용
-                        .into(postImage)  // ImageView에 이미지 설정
-                }.addOnFailureListener {
-                    // 이미지 로딩 실패 시 처리
-                }
-            } else {
-                //이미지가 없으면 이미지뷰를 안보이게한다.
-                postImage.visibility = ImageView.INVISIBLE
-            }
-             */
+            //화면에 이미지 띄우기
             if(post?.imagePath != null)
             {
                 FireStorageConnection.bindImageByPath(this,post.imagePath!!,postImage)
             }
+            else
+            //이미지가 없으면 이미지뷰를 안보이게한다.
+                postImage.visibility = ImageView.INVISIBLE
+
 
         }
 

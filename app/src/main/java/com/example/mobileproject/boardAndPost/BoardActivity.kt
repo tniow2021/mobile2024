@@ -2,11 +2,13 @@ package com.example.mobileproject.boardAndPost
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.MotionEvent
 import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.mobileproject.FireStoreConnection
 import com.example.mobileproject.R
 import com.example.mobileproject.databinding.ActivityBoardBinding
+
 
 class BoardActivity : AppCompatActivity() {
 
@@ -55,7 +57,28 @@ class BoardActivity : AppCompatActivity() {
                 myintent.putExtra("postPath", selectedPost.postPath)
                 startActivity(myintent)
             }
-
         }
+
+        //게시글 쓰기버튼
+        writePostButton.setOnClickListener{
+            var myintent= Intent(applicationContext, CreatePostActivity::class.java)
+            myintent.putExtra("boardPath","boards/boardInfo/board2")
+            myintent.putExtra("boardName","board2")
+            startActivity(myintent)
+        }
+
+        //게시글 검색박스
+        searchEditText.setOnTouchListener { v, event ->
+            // EditText 외부를 터치했을 때
+            if (isTouchOutsideEditText(event)) {
+
+            }
+        }
+    }
+    // EditText 외부를 터치했는지 확인하는 함수
+    private fun isTouchOutsideEditText(event: MotionEvent): Boolean {
+        val rect = android.graphics.Rect()
+        editText.getGlobalVisibleRect(rect)
+        return !rect.contains(event.rawX.toInt(), event.rawY.toInt())
     }
 }

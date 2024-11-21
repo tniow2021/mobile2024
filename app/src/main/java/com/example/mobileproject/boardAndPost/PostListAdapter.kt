@@ -48,7 +48,10 @@ class PostListAdapter
         dateTextView.text=formattedDate
 
         // 프리뷰이미지 있으면 이미지 띄우기
-        FireStorageConnection.bindImageByPath(context,postListItem.previewImagePath!!,imageView)
+        if(postListItem.previewImagePath != null)
+            FireStorageConnection.bindImageByPath(context,postListItem.previewImagePath!!,imageView)
+        else //프리뷰이미지가 없으면 이미지뷰를 안보이게하기
+            imageView.visibility=ImageView.INVISIBLE
         return view
     }
 
