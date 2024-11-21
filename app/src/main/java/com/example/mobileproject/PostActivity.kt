@@ -9,9 +9,11 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.bumptech.glide.Glide
 import com.example.mobileproject.databinding.ActivityPostBinding
 import com.example.mobileproject.Post
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -61,9 +63,35 @@ class PostActivity : AppCompatActivity() {
             val date = Date(post?.timestamp?:0)
             // 날짜 포맷 설정
             //val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
-            val dateFormat = SimpleDateFormat("MM-dd HH:mm:ss", Locale.getDefault())
+            val dateFormat = SimpleDateFormat("yyyy년 MM월 dd일 HH:mm:ss", Locale.getDefault())
             val formattedDate = dateFormat.format(date)
             postDate.text=formattedDate
+
+
+
+            // 이미지
+            if(post?.imagePath!=null){
+                // Firebase Storage 참조
+                val storageReference = FirebaseStorage.getInstance().reference
+
+                // 이미지 경로 설정 imagePath는 파이어스토리지상의 경로
+                val imageRef = storageReference.child(post.imagePath!!)
+
+                // 이미지의 다운로드 URL 가져오기
+                imageRef.downloadUrl.addOnSuccessListener { uri ->
+                    // Glide를 사용하여 ImageView에 이미지 로드
+                    Glide.with(this)
+                        .load(uri)  // Firebase에서 받은 다운로드 URL 사용
+                        .into(postImage)  // ImageView에 이미지 설정
+                }.addOnFailureListener {
+                    // 이미지 로딩 실패 시 처리
+                }
+            }
+            else{
+                //이미지가 없으면 이미지뷰를 안보이게한다.
+                postImage.visibility=ImageView.INVISIBLE
+            }
+
         }
 
 

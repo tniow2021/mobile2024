@@ -79,4 +79,8 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    //이미지 불러오는 라이브러리
+    implementation ("com.github.bumptech.glide:glide:4.15.1")  // Glide 의존성 추가
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.15.1")
 }

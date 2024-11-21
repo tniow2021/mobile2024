@@ -19,6 +19,7 @@ class BoardActivity : AppCompatActivity() {
         listView = findViewById(R.id.listView)
 
         //현재보드경로저장
+        val intent = intent
         val boardPath=intent.getStringExtra("boardPath")
 
         //현재 보드의 모든 게시글 정보가져오기
@@ -43,7 +44,7 @@ class BoardActivity : AppCompatActivity() {
                     //액티비티간 매개변수는 게시글경로
                     myintent.putExtra("postPath",selectedPost.postPath)
                     Log.d("sex","fffffffffffffffffffffffffffff");
-                    startActivity(intent)
+                    startActivity(myintent)
             }
 
         }

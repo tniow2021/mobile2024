@@ -19,13 +19,13 @@ class MainActivity : AppCompatActivity() {
         //메인화면에 있는 '게시판 가기' 버튼
         binding.goBoardBtn.setOnClickListener{
             var myintent= Intent(applicationContext,BoardActivity::class.java)
-            myintent.putExtra("boardPath","boards/boardInfo/board1")
+            myintent.putExtra("boardPath","boards/boardInfo/board2")
             startActivity(myintent)
         }
         //메인화면에 있는 '게시글 쓰기' 버튼
         binding.createPost.setOnClickListener{
             var myintent= Intent(applicationContext,CreatePost::class.java)
-            myintent.putExtra("boardPath","boards/boardInfo/board1")
+            myintent.putExtra("boardPath","boards/boardInfo/board2")
             startActivity(myintent)
         }
 

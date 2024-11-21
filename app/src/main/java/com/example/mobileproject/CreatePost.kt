@@ -23,7 +23,7 @@ class CreatePost : AppCompatActivity() {
     private lateinit var selectImageButton: Button
     private lateinit var uploadButton: Button
     private var imageUri: Uri? = null
-
+    private var boardPath:String?=""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +37,12 @@ class CreatePost : AppCompatActivity() {
         selectImageButton = binding.selectImageButton
         uploadButton = binding.uploadButton
 
+        //보드경로 불러오기
+        val intent=intent
+        boardPath=intent.getStringExtra("boardPath")
+        if(boardPath ==null){
+            finish()
+        }
         //이미지 선택시 콜백작성
         val getContent =
             registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
@@ -66,7 +72,7 @@ class CreatePost : AppCompatActivity() {
             imagePath=null
         )
         if(imageUri != null){
-            FireStorageConnection.addFile("boards/board1", imageUri){
+            FireStorageConnection.addFile("images/", imageUri){
 
                 success,filePath ->
                 //파일을 스토리지에 올린 뒤 스토리지상의 경로를 post에 추가
@@ -93,7 +99,7 @@ class CreatePost : AppCompatActivity() {
     private fun uploadPost2(post:Post)
     {
         //post를 파이어스토어에 올림.
-        FireStoreConnection.addDocument("boards/boardInfo/board1",post){
+        FireStoreConnection.addDocument(boardPath!!,post){
                 success, docPath ->
             if(success){
 
@@ -104,7 +110,7 @@ class CreatePost : AppCompatActivity() {
                 //postListItem= 게시글목록에 표시될 게시글의 정보
                 val postListItem=PostListItem.getPostListItem(post,docPath)
                 FireStoreConnection.addDocument(
-                    "boards/boardInfo/board1"+"/reference/postList",postListItem){
+                    boardPath+"/reference/postList",postListItem){
                         success2, docId ->
                     if(success2) {
                         Toast.makeText(this, "게시글올리기 성공.", Toast.LENGTH_SHORT).show()
