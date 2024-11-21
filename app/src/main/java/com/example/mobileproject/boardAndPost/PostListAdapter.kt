@@ -1,11 +1,14 @@
-package com.example.mobileproject
+package com.example.mobileproject.boardAndPost
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.ImageView
 import android.widget.TextView
+import com.example.mobileproject.FireStorageConnection
+import com.example.mobileproject.R
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -22,23 +25,30 @@ class PostListAdapter
         val view: View = convertView ?: LayoutInflater.from(context).inflate(resource, parent, false)
 
         // 데이터 바인딩
-        val titleTextView: TextView = view.findViewById(R.id.postListItem_title)
-        val authorTextView: TextView = view.findViewById(R.id.postListItem_auther)
-        val dateTextView: TextView = view.findViewById(R.id.postListItem_date)
+        val titleTextView: TextView = view.findViewById(R.id.itemPostPreview_title)
+        val authorTextView: TextView = view.findViewById(R.id.itemPostPreview_auther)
+        val dateTextView: TextView = view.findViewById(R.id.itemPostPreview_date)
+        val imageView: ImageView = view.findViewById(R.id.itemPostPreview_postImageView)
 
+        //postListItem 객체 받아오기
         val postListItem = postList[position]
+
+        // post화면에 제목띄우기
         titleTextView.text = postListItem.title
+        // 화면에 작성자이름 띄우기
         authorTextView.text = postListItem.author
 
+
+        // 화면에 날짜띄우기
         // postListItem안에 있는 Timestamp를 Date 객체로 변환
         val date = Date(postListItem.timestamp)
-
-        // 날짜 포맷 설정
         //val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
         val dateFormat = SimpleDateFormat("MM-dd HH:mm:ss", Locale.getDefault())
         val formattedDate = dateFormat.format(date)
-
         dateTextView.text=formattedDate
+
+        // 프리뷰이미지 있으면 이미지 띄우기
+        FireStorageConnection.bindImageByPath(context,postListItem.previewImagePath!!,imageView)
         return view
     }
 

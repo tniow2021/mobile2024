@@ -1,6 +1,5 @@
-package com.example.mobileproject
+package com.example.mobileproject.boardAndPost
 
-import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -10,12 +9,12 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import com.example.mobileproject.FireStorageConnection
+import com.example.mobileproject.FireStoreConnection
 import com.example.mobileproject.databinding.ActivityCreatePostBinding
-import com.google.firebase.Timestamp
 import java.util.Date
-import java.util.UUID
 
-class CreatePost : AppCompatActivity() {
+class CreatePostActivity : AppCompatActivity() {
     private lateinit var titleEditText: EditText
     private lateinit var contentEditText: EditText
     private lateinit var authorEditText: EditText
@@ -23,7 +22,9 @@ class CreatePost : AppCompatActivity() {
     private lateinit var selectImageButton: Button
     private lateinit var uploadButton: Button
     private var imageUri: Uri? = null
+
     private var boardPath:String?=""
+    private var boardName:String?=""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,8 +39,8 @@ class CreatePost : AppCompatActivity() {
         uploadButton = binding.uploadButton
 
         //보드경로 불러오기
-        val intent=intent
         boardPath=intent.getStringExtra("boardPath")
+        boardName=intent.getStringExtra("boardName")
         if(boardPath ==null){
             finish()
         }
@@ -64,7 +65,7 @@ class CreatePost : AppCompatActivity() {
 
     private fun uploadPost()
     {
-        val post=Post(
+        val post= Post(
             title = titleEditText.text.toString() ?:"",
             author = authorEditText.text.toString() ?:"",
             content = contentEditText.text.toString() ?:"",
@@ -72,19 +73,18 @@ class CreatePost : AppCompatActivity() {
             imagePath=null
         )
         if(imageUri != null){
-            FireStorageConnection.addFile("images/", imageUri){
+            FireStorageConnection.addFile(boardName + '/', imageUri) {
 
-                success,filePath ->
+                    success, filePath ->
                 //파일을 스토리지에 올린 뒤 스토리지상의 경로를 post에 추가
-                if(success) {//파일 올리기에 성공했다면
+                if (success) {//파일 올리기에 성공했다면
                     Log.d("FireStorageConnection", filePath)
                     post.imagePath = filePath //post에 추가
 
                     //파이어스토어에 올리기
                     uploadPost2(post)
-                }
-                else{//파일 올리기에 실패했다면
-                    Toast.makeText(this,"이미지를 올리지 못했습니다.",Toast.LENGTH_SHORT).show()
+                } else {//파일 올리기에 실패했다면
+                    Toast.makeText(this, "이미지를 올리지 못했습니다.", Toast.LENGTH_SHORT).show()
                     return@addFile
                 }
             }
@@ -96,33 +96,30 @@ class CreatePost : AppCompatActivity() {
 
 
     }
-    private fun uploadPost2(post:Post)
+    private fun uploadPost2(post: Post)
     {
         //post를 파이어스토어에 올림.
-        FireStoreConnection.addDocument(boardPath!!,post){
-                success, docPath ->
-            if(success){
+        FireStoreConnection.addDocument(boardPath!!, post) { success, docPath ->
+            if (success) {
 
                 //추가한 문서의 정보(제목과 문서경로)를
                 //상대경로/reference/postList 테이블에 저장해야
                 //게시글 목록을 불러올때 참고할 수 있음.
 
                 //postListItem= 게시글목록에 표시될 게시글의 정보
-                val postListItem=PostListItem.getPostListItem(post,docPath)
+                val postListItem = PostListItem.getPostListItem(post, docPath)
                 FireStoreConnection.addDocument(
-                    boardPath+"/reference/postList",postListItem){
-                        success2, docId ->
-                    if(success2) {
+                    boardPath + "/reference/postList", postListItem
+                ) { success2, docId ->
+                    if (success2) {
                         Toast.makeText(this, "게시글올리기 성공.", Toast.LENGTH_SHORT).show()
                         finish()//게시가 완료되었으면 다시 돌아감.
-                    }
-                    else
-                        Toast.makeText(this,"게시글올리기 실패2.",Toast.LENGTH_SHORT).show()
+                    } else
+                        Toast.makeText(this, "게시글올리기 실패2.", Toast.LENGTH_SHORT).show()
 
                 }
-            }
-            else{
-                Toast.makeText(this,"게시글올리기 실패.",Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "게시글올리기 실패.", Toast.LENGTH_SHORT).show()
             }
 
         }

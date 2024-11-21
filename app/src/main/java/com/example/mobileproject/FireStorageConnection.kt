@@ -1,7 +1,10 @@
 package com.example.mobileproject
 
+import android.content.Context
 import android.net.Uri
 import android.util.Log
+import android.widget.ImageView
+import com.bumptech.glide.Glide
 import com.google.firebase.storage.FirebaseStorage
 import java.util.UUID
 
@@ -24,6 +27,26 @@ open class FireStorageConnection{
                     isCompleted(false,"")
                     Log.d("FireStorageConnection", "imageUproad failure")
                 }
+        }
+        //정적함수. 파이어스토리지 상의 이미지 경로를 가지고 이미지뷰에 이미지표시하는 함수
+        open fun bindImageByPath(context:Context,imagePath:String,imageView:ImageView)
+        {
+            // Firebase Storage 참조
+            val storageReference = FirebaseStorage.getInstance().reference
+
+            // 이미지 경로 설정 imagePath는 파이어스토리지상의 경로
+            val imageRef = storageReference.child(imagePath)
+
+            // 이미지의 다운로드 URL 가져오기
+            imageRef.downloadUrl.addOnSuccessListener { uri ->
+                // Glide를 사용하여 ImageView에 이미지 로드
+                Glide.with(context)
+                    .load(uri)  // Firebase에서 받은 다운로드 URL 사용
+                    .into(imageView)  // ImageView에 이미지 설정
+            }.addOnFailureListener {
+                // 이미지 로딩 실패 시 처리
+                imageView.visibility=ImageView.INVISIBLE
+            }
         }
     }
 }

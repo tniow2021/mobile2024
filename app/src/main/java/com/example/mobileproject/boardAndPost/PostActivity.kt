@@ -1,18 +1,14 @@
-package com.example.mobileproject
+package com.example.mobileproject.boardAndPost
 
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.bumptech.glide.Glide
+import com.example.mobileproject.FireStorageConnection
+import com.example.mobileproject.FireStoreConnection
 import com.example.mobileproject.databinding.ActivityPostBinding
-import com.example.mobileproject.Post
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -26,6 +22,9 @@ class PostActivity : AppCompatActivity() {
     private lateinit var postContent: TextView
     private lateinit var postImage: ImageView
 
+    companion object{
+
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding=ActivityPostBinding.inflate(layoutInflater)
@@ -45,32 +44,31 @@ class PostActivity : AppCompatActivity() {
             finish()
         }
         //게시물경로로 게시물(post객체)받아오기
-        FireStoreConnection.onGetDocument(postPath!!){
-            document ->
-            val post:Post?=document.toObject(Post::class.java)
+        FireStoreConnection.onGetDocument(postPath!!) { document ->
+            val post: Post? = document.toObject(Post::class.java)
 
-            if(post == null)//게시글을 받아와도 안에든게 없으면 종료.
+            if (post == null)//게시글을 받아와도 안에든게 없으면 종료.
             {
                 Log.d("dfdf", "불러오기에 실패함t=8.")
                 finish()
             }
             //post 객체안의 데이터를 뺴내어 화면에 표시하기.
-            postTitle.text = post?.title?:""
-            postDate.text = post?.title?:""
-            postAuther.text = post?.author?:""
-            postContent.text = post?.content?:""
+            postTitle.text = post?.title ?: ""
+            postDate.text = post?.title ?: ""
+            postAuther.text = post?.author ?: ""
+            postContent.text = post?.content ?: ""
             // postListItem안에 있는 Timestamp를 date로 변환해 표기하기
-            val date = Date(post?.timestamp?:0)
+            val date = Date(post?.timestamp ?: 0)
             // 날짜 포맷 설정
             //val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
             val dateFormat = SimpleDateFormat("yyyy년 MM월 dd일 HH:mm:ss", Locale.getDefault())
             val formattedDate = dateFormat.format(date)
-            postDate.text=formattedDate
-
+            postDate.text = formattedDate
 
 
             // 이미지
-            if(post?.imagePath!=null){
+            /*
+            if (post?.imagePath != null) {
                 // Firebase Storage 참조
                 val storageReference = FirebaseStorage.getInstance().reference
 
@@ -86,10 +84,14 @@ class PostActivity : AppCompatActivity() {
                 }.addOnFailureListener {
                     // 이미지 로딩 실패 시 처리
                 }
-            }
-            else{
+            } else {
                 //이미지가 없으면 이미지뷰를 안보이게한다.
-                postImage.visibility=ImageView.INVISIBLE
+                postImage.visibility = ImageView.INVISIBLE
+            }
+             */
+            if(post?.imagePath != null)
+            {
+                FireStorageConnection.bindImageByPath(this,post.imagePath!!,postImage)
             }
 
         }

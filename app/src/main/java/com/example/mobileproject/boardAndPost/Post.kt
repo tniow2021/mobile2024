@@ -1,6 +1,4 @@
-package com.example.mobileproject
-
-import com.google.firebase.Timestamp
+package com.example.mobileproject.boardAndPost
 
 //매개변수 기본값으로 초기화를 안해주면 정체모를 오류나니 주의
 data class Post(

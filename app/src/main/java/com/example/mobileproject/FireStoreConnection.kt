@@ -8,40 +8,12 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 open class FireStoreConnection {
     companion object {
-        //private val db: FirebaseFirestore
-        //private val storage: FirebaseStorage
-/*
-        init {
-            Log.d("fseffes", "00000")
-            //db = FirebaseFirestore.getInstance()
-            //storage = FirebaseStorage.getInstance()
-        }
-
-
-    //    open inline fun <reified T>  getDocument(list : List<T>,route:String){
-    //        db.collection(route)
-    //            .get()
-    //            .addOnCompleteListener { task ->
-    //                if (task.isSuccessful) {
-    //                    val document = task.result
-    //                    if (document != null && document.exists()) {
-    //                        val post = document.toObject(T::class.java)
-    //                    }
-    //                } else {
-    //                    Log.d("Firestore", "Error getting document: ", task.exception)
-    //                }
-    //            }
-    //    }
-
-         */
         open fun onGetCollection(collection: String,callBack:(documents:List<DocumentSnapshot>)->Unit) {
             val db=FirebaseFirestore.getInstance()
             db.collection(collection)
                 .get()
                 .addOnSuccessListener { result ->
-                    Log.d("fgurhguhr","gooooooooood")
                     callBack(result.documents)
-                    Log.d("fgurhguhr","gooooooooood")
                 }
         }
         open fun onGetDocument(documentPath:String,callBack:(document:DocumentSnapshot)->Unit)
@@ -60,6 +32,20 @@ open class FireStoreConnection {
                     {
                         Log.d("onGetDocument","failure")
                     }
+                }
+        }
+
+        //문서삭제하기 ( 삭제여부를 담아 콜백호출)
+        open fun documentDelete(documentPath:String,callBack:(success:Boolean)->Unit)
+        {
+            val db=FirebaseFirestore.getInstance()
+            db.document(documentPath)
+                .delete()
+                .addOnSuccessListener {
+                    callBack(true)
+                }
+                .addOnFailureListener{
+                    callBack(false)
                 }
         }
 
