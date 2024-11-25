@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MotionEvent
 import android.widget.ListView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.mobileproject.FireStoreConnection
 import com.example.mobileproject.R
@@ -21,6 +22,7 @@ class BoardActivity : AppCompatActivity() {
 
         //activity_board xml파일 바인딩
         val title=binding.boardTitle
+        val searchButton=binding.boardSearchButton
         val searchEditText=binding.boardSearchEditText
         val writePostButton=binding.boardWritePostButton
         val listView = binding.boardListView
@@ -67,18 +69,13 @@ class BoardActivity : AppCompatActivity() {
             startActivity(myintent)
         }
 
-        //게시글 검색박스
-        searchEditText.setOnTouchListener { v, event ->
-            // EditText 외부를 터치했을 때
-            if (isTouchOutsideEditText(event)) {
-
+        //게시글 검색버튼
+        searchButton.setOnClickListener{
+            var searchTxt=searchEditText.text.toString()
+            if(searchTxt==""){
+                Toast.makeText(this,"검색어를 입력해주십시요",Toast.LENGTH_SHORT).show()
             }
         }
-    }
-    // EditText 외부를 터치했는지 확인하는 함수
-    private fun isTouchOutsideEditText(event: MotionEvent): Boolean {
-        val rect = android.graphics.Rect()
-        editText.getGlobalVisibleRect(rect)
-        return !rect.contains(event.rawX.toInt(), event.rawY.toInt())
+
     }
 }
