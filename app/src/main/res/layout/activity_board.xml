@@ -33,7 +33,6 @@
         android:text="게시물 작성"
         android:layout_gravity="end"
         android:layout_margin="16dp"/>
-
     <ListView
         android:id="@+id/board_ListView"
         android:layout_width="match_parent"

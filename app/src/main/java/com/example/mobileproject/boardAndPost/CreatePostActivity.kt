@@ -107,7 +107,7 @@ class CreatePostActivity : AppCompatActivity() {
                 //게시글 목록을 불러올때 참고할 수 있음.
 
                 //postListItem= 게시글목록에 표시될 게시글의 정보
-                val postListItem = PostListItem.getPostListItem(post, docPath)
+                val postListItem = PostListItem.getPostListItem(post, docPath,Date().time)
                 FireStoreConnection.addDocument(
                     boardPath + "/reference/postList", postListItem
                 ) { success2, docId ->
