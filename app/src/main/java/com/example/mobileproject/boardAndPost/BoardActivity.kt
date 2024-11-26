@@ -21,7 +21,7 @@ class BoardActivity : AppCompatActivity() {
     private lateinit var adapter:PostListAdapter
     private fun refresh()
     {
-        FireStoreConnection.onGetCollection(boardPath + "/reference/postList") { documents ->
+        FireStoreConnection.onGetCollection(boardPath + "/reference") { documents ->
             for (document in documents) {
 
                 val postListItem = document.toObject(PostListItem::class.java)

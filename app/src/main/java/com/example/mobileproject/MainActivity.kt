@@ -4,11 +4,31 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.mobileproject.boardAndPost.*
+import com.example.mobileproject.boardAndPost.boardSelectAndCreate.BoardCreateActivity
+import com.example.mobileproject.boardAndPost.boardSelectAndCreate.PublicBoardsActivity
+import com.example.mobileproject.boardAndPost.boardSelectAndCreate.UserBoardsActivity
 import com.example.mobileproject.databinding.ActivityMainBinding
 /*
 project structure에서 안드로이드 API를 35로 설정
 파이어베이스 연동 안되있으면 tools에서 firebase에서 FireStore랑 FireStorage 연동 및 sdk다운받기
 뷰바인딩 설정
+
+
+-------------------------------------중요------------------------------------------
+--파이어 스토어 경로체계
+팀정보: teamData/팀문서
+선수정보: teamData/팀이름/playerList/선수문서
+
+공통게시판:publicBoards/게시판문서
+공통게시판안에 있는 게시글:publicBoards/게시판문서/posts/게시글문서
+
+유저게시판:userBoards/게시판문서
+공통게시판안에 있는 게시글:userBoards/게시판문서/posts/게시글문서
+
+--스토리지 경로체계
+선수사진:teamData/팀이름/선수이름.png
+공통게시판 게시글에 올라간 사진들: publicBoards/게시판이름/
+유저게시판 게시글에 올라간 사진들: userBoards/게시판이름/
  */
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,20 +37,38 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
+        //메인화면에 있는 '공통게시판모음' 버튼
+        binding.mainGoPublicBoards.setOnClickListener{
+            var myintent= Intent(applicationContext, PublicBoardsActivity::class.java)
+            startActivity(myintent)
+        }
+        //메인화면에 있는 '유저게시판모음' 버튼
+        binding.mainGoUserBoards.setOnClickListener{
+            var myintent= Intent(applicationContext, UserBoardsActivity::class.java)
+            startActivity(myintent)
+        }
+        //메인화면에 있는 '게시판 만들기' 버튼
+        binding.mainGoCreateBoard.setOnClickListener{
+            var myintent= Intent(applicationContext, BoardCreateActivity::class.java)
+            startActivity(myintent)
+        }
+        /*
         //메인화면에 있는 '게시판 가기' 버튼
-        binding.goBoardBtn.setOnClickListener{
+        binding.mainGoBoardBtn.setOnClickListener{
             var myintent= Intent(applicationContext, BoardActivity::class.java)
             myintent.putExtra("boardPath","boards/boardInfo/board2")
             myintent.putExtra("boardName","board2")
             startActivity(myintent)
         }
         //메인화면에 있는 '게시글 쓰기' 버튼
-        binding.createPost.setOnClickListener{
+        binding.mainCreatePost.setOnClickListener{
             var myintent= Intent(applicationContext, CreatePostActivity::class.java)
             myintent.putExtra("boardPath","boards/boardInfo/board2")
             myintent.putExtra("boardName","board2")
             startActivity(myintent)
         }
+
+         */
 
 
     }

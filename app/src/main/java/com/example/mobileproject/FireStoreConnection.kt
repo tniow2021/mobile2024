@@ -2,6 +2,7 @@ package com.example.mobileproject
 
 import android.util.Log
 import android.widget.Toast
+import com.google.firebase.firestore.AggregateSource
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
@@ -34,6 +35,22 @@ open class FireStoreConnection {
                     }
                 }
         }
+        open fun onGetCount(collection: String,callBack:(numberOfDocument:Long)->Unit)
+        {
+            val db=FirebaseFirestore.getInstance()
+            db.collection(collection)
+                .count()
+                .get(AggregateSource.SERVER).addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    //Count fetched successfully
+                    val snapshot = task.result
+                    callBack(snapshot.count)
+                }
+                else{
+                    Log.d("onGetCount","failure")
+                }
+            }
+        }
 
         //문서삭제하기 ( 삭제여부를 담아 콜백호출)
         open fun documentDelete(documentPath:String,callBack:(success:Boolean)->Unit)
@@ -60,6 +77,20 @@ open class FireStoreConnection {
                     documentReference->
 
                     isCompleted(true,documentReference.path)
+                }
+                .addOnFailureListener {
+                    isCompleted(false,"")
+                }
+        }
+        //이 친구는 추가로 Document의 id까지 지정할 수 있게하는 함수
+        open fun setDocument(documentPath: String,post:Any,
+                             isCompleted:(success:Boolean,docPath:String)->Unit)
+        {
+            val db=FirebaseFirestore.getInstance()
+            db.document(documentPath)
+                .set(post)
+                .addOnSuccessListener {
+                    isCompleted(true,documentPath)
                 }
                 .addOnFailureListener {
                     isCompleted(false,"")
