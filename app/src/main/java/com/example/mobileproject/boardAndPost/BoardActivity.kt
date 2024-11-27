@@ -79,7 +79,7 @@ class BoardActivity : AppCompatActivity() {
             myintent.putExtra("boardName",boardName)
             startActivity(myintent)
         }
-        
+
         //게시글 검색버튼
         searchButton.setOnClickListener{
             var searchTxt=searchEditText.text.toString()
