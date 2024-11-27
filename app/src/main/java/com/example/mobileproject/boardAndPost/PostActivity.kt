@@ -51,7 +51,7 @@ class PostActivity : AppCompatActivity() {
             //post 객체안의 데이터를 뺴내어 화면에 표시하기.
             postTitle.text = post?.title ?: ""
             postDate.text = post?.title ?: ""
-            postAuther.text = post?.author ?: ""
+            postAuther.text = "작성자 : "+post?.author ?: ""
             postContent.text = post?.content ?: ""
             // postListItem안에 있는 Timestamp를 date로 변환해 표기하기
             val date = Date(post?.timestamp ?: 0)

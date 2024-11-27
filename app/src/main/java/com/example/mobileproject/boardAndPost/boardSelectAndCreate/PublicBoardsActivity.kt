@@ -37,7 +37,7 @@ class PublicBoardsActivity : AppCompatActivity() {
         //어댑터 만들기
         adapter = BoardListAdapter(this, R.layout.item_board_preview,
             boardList,"publicBoards/")
-
+        listView.adapter=adapter
         // 리스트 아이템 클릭 시 게시글 화면으로 이동
         listView.setOnItemClickListener { _, _, position, _ ->
             // 클릭된 게시판 객체

@@ -21,7 +21,9 @@ class BoardActivity : AppCompatActivity() {
     private lateinit var adapter:PostListAdapter
     private fun refresh()
     {
-        FireStoreConnection.onGetCollection(boardPath + "/reference") { documents ->
+        FireStoreConnection.onGetCollection(boardPath + "/reference") {
+            documents ->
+            postList.clear()
             for (document in documents) {
 
                 val postListItem = document.toObject(PostListItem::class.java)
@@ -72,11 +74,12 @@ class BoardActivity : AppCompatActivity() {
         //게시글 쓰기버튼
         writePostButton.setOnClickListener{
             var myintent= Intent(applicationContext, CreatePostActivity::class.java)
-            myintent.putExtra("boardPath","boards/boardInfo/board2")
-            myintent.putExtra("boardName","board2")
+            myintent.putExtra("boardPath",boardPath)
+            myintent.putExtra("boardName",boardName)
+            myintent.putExtra("boardName",boardName)
             startActivity(myintent)
         }
-
+        
         //게시글 검색버튼
         searchButton.setOnClickListener{
             var searchTxt=searchEditText.text.toString()

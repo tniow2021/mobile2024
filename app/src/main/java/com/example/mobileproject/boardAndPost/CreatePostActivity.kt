@@ -40,7 +40,7 @@ class CreatePostActivity : AppCompatActivity() {
 
         //보드경로 불러오기
         boardPath=intent.getStringExtra("boardPath")
-        boardName=intent.getStringExtra("boardName")
+        boardPath=intent.getStringExtra("boardPath")
         if(boardPath ==null){
             finish()
         }
@@ -73,7 +73,7 @@ class CreatePostActivity : AppCompatActivity() {
             imagePath=null
         )
         if(imageUri != null){
-            FireStorageConnection.addFile(boardName + '/', imageUri) {
+            FireStorageConnection.addFile(boardPath!!, imageUri) {
 
                     success, filePath ->
                 //파일을 스토리지에 올린 뒤 스토리지상의 경로를 post에 추가
@@ -99,7 +99,7 @@ class CreatePostActivity : AppCompatActivity() {
     private fun uploadPost2(post: Post)
     {
         //post를 파이어스토어에 올림.
-        FireStoreConnection.addDocument(boardPath!!, post) { success, docPath ->
+        FireStoreConnection.addDocument(boardPath+"/posts", post) { success, docPath ->
             if (success) {
 
                 //추가한 문서의 정보(제목과 문서경로)를
@@ -109,7 +109,7 @@ class CreatePostActivity : AppCompatActivity() {
                 //postListItem= 게시글목록에 표시될 게시글의 정보
                 val postListItem = PostListItem.getPostListItem(post, docPath,Date().time)
                 FireStoreConnection.addDocument(
-                    boardPath + "/reference/postList", postListItem
+                    boardPath + "/reference", postListItem
                 ) { success2, docId ->
                     if (success2) {
                         Toast.makeText(this, "게시글올리기 성공.", Toast.LENGTH_SHORT).show()

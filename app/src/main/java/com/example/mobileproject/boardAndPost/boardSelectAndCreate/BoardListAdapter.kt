@@ -1,6 +1,7 @@
 package com.example.mobileproject.boardAndPost.boardSelectAndCreate
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,6 +41,7 @@ class BoardListAdapter
                 numberOfDocument->
             numberOfPost.text="게시글 갯수 : "+numberOfDocument.toString()
         }
+        Log.d("getView",boardListItem.boardName)
         return view
     }
 

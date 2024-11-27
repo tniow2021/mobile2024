@@ -35,6 +35,28 @@ open class FireStoreConnection {
                     }
                 }
         }
+        //이 친구는 콜백에 성공여부까지 담아서 보내줌
+        open fun onGetDocument(documentPath:String,callBack:(success:Boolean,document:DocumentSnapshot?)->Unit)
+        {
+            Log.d("onGetDocument",documentPath)
+            val db=FirebaseFirestore.getInstance()
+            db.document(documentPath)
+                .get()
+                .addOnSuccessListener {
+                        document->
+                    if(document.exists())//만약 문서가 존재하면
+                    {
+                        callBack(true,document)
+                    }
+                    else
+                    {
+                        callBack(false,null)
+                    }
+                }
+                .addOnFailureListener{
+                    callBack(false,null)
+                }
+        }
         open fun onGetCount(collection: String,callBack:(numberOfDocument:Long)->Unit)
         {
             val db=FirebaseFirestore.getInstance()

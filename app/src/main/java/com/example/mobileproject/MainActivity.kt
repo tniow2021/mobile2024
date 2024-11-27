@@ -23,7 +23,7 @@ project structure에서 안드로이드 API를 35로 설정
 공통게시판안에 있는 게시글:publicBoards/게시판문서/posts/게시글문서
 
 유저게시판:userBoards/게시판문서
-공통게시판안에 있는 게시글:userBoards/게시판문서/posts/게시글문서
+유저게시판안에 있는 게시글:userBoards/게시판문서/posts/게시글문서
 
 --스토리지 경로체계
 선수사진:teamData/팀이름/선수이름.png
