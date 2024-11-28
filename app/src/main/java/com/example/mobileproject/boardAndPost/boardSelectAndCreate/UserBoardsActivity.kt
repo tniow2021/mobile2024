@@ -29,6 +29,9 @@ class UserBoardsActivity : AppCompatActivity() {
 
                 val board = document.toObject(BoardListItem::class.java)
                 Log.d("UserBoardsActivity",board!!.boardName)
+                if(board.boardName==""){ // 만약 문서를 가져왔는데 아무 데이터가 없는 빈 문서면 무시
+                    continue
+                }
                 boardList.add(board)
             }
             adapter.notifyDataSetChanged()

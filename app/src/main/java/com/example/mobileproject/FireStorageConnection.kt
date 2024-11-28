@@ -48,6 +48,24 @@ open class FireStorageConnection{
                 imageView.visibility=ImageView.INVISIBLE
             }
         }
+        open fun deleteFile(filePath: String,callBack:(success: Boolean)->Unit){
+            // FirebaseStorage 인스턴스 초기화
+            val storage = FirebaseStorage.getInstance()
+
+            // 파일 경로로부터 StorageReference 객체를 생성
+            val storageRef= storage.reference.child(filePath)
+
+            // 파일 삭제
+            storageRef.delete()
+                .addOnSuccessListener {
+                    //삭제 성공 시 실행
+                    callBack(true)
+                }
+                .addOnFailureListener { exception ->
+                    //삭제 실패 시 실행
+                    callBack(false)
+                }
+        }
 
         //경로를 삭제하는 함수. (성공여부반환하는 콜백은 만들기 어려워서 뺐음)
         open fun deleteDirectory(directoryPath: String) {
@@ -64,7 +82,7 @@ open class FireStorageConnection{
                     for (item in listResult.items) {
                         // 각 파일 삭제
                         item.delete()
-                            /*
+                        /*
                             .addOnSuccessListener {
                                 println("파일 ${item.name}이 삭제되었습니다.")
                             }
@@ -80,12 +98,13 @@ open class FireStorageConnection{
                         deleteDirectory(prefix.path)  // 서브 디렉터리 재귀적으로 삭제
                     }
                 }
-                /*
+            /*
                 .addOnFailureListener { exception ->
                     println("디렉터리 파일 나열 실패: $exception")
                 }
 
                  */
+
         }
     }
 }
