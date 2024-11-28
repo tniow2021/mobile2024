@@ -21,14 +21,18 @@ class BoardActivity : AppCompatActivity() {
     private lateinit var adapter:PostListAdapter
     private fun refresh()
     {
-        FireStoreConnection.onGetCollection(boardPath + "/reference") {
+        FireStoreConnection.onGetCollection(boardPath + "/posts") {
             documents ->
             postList.clear()
             for (document in documents) {
 
-                val postListItem = document.toObject(PostListItem::class.java)
-                if (postListItem != null)
+                val post = document.toObject(Post::class.java)
+                if (post != null){
+                    val postListItem=PostListItem.getPostListItem(post,document.reference.path.toString(),post.timestamp)
                     postList.add(postListItem)
+                }
+
+
             }
             adapter.notifyDataSetChanged()
         }
@@ -90,15 +94,17 @@ class BoardActivity : AppCompatActivity() {
             }
             else//검색
             {
-                FireStoreConnection.selectDocuments(boardPath!!,
-                    "content",searchTxt)
+                Log.d("BoardActivity","searchButton"+boardPath!!+"/posts");
+                FireStoreConnection.selectDocuments(boardPath!!+"/posts/",
+                    "auther",searchTxt)
                 {
                     success, documents ->
                     if(success){//검색해서 문서들이 받아와졌으면
-
+                        Log.d("BoardActivity","searchButton2");
                         postList.clear()
                         for (document in documents!!) {
                             val post = document.toObject(Post::class.java)
+                            Log.d("BoardActivity",post!!.content);
                             if (post != null){
                                 //boardPath로 불러온 문서는 Post클래스이기 때문에 리스트뷰에 출력하기위해
                                 //PostListItem으로 변환해주는 귀찮은 일을 해줌.
@@ -106,16 +112,14 @@ class BoardActivity : AppCompatActivity() {
                                 postList.add(postlistItem)
                             }
                         }
-                        //검색결과가 1개이상 있을 때만 리스트뷰를 새로고침
-                        if(postList.count()>0){
-                            adapter.notifyDataSetChanged()
-                        }
-                        else{
+                        Log.d("BoardActivity","searchButton3");
+                        adapter.notifyDataSetChanged()
+                        if(postList.count()==0){
                             Toast.makeText(this,"검색된 내용이 없습니다.",Toast.LENGTH_SHORT).show()
                         }
                     }
                     else{
-                        Toast.makeText(this,"검색된 내용이 없습니다.",Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this,"검색된 내용이 없습니다2.",Toast.LENGTH_SHORT).show()
                     }
                 }
             }
@@ -125,3 +129,5 @@ class BoardActivity : AppCompatActivity() {
 
     }
 }
+
+

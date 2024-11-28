@@ -24,9 +24,6 @@
             android:name=".boardAndPost.boardSelectAndCreate.PublicBoardsActivity"
             android:exported="false" />
         <activity
-            android:name=".boardAndPost.BoardSelectActivity"
-            android:exported="false" />
-        <activity
             android:name=".boardAndPost.PostActivity"
             android:exported="false" />
         <activity

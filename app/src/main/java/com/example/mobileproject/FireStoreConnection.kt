@@ -119,6 +119,7 @@ open class FireStoreConnection {
                 }
         }
 
+        //이 함수는 키워드와 필드데이터가 100% 일치해야 검색됨. 부분문자열을 찾는 건 안됨.
         //문서검색하기(컬렉션경로,검색할필드명,키워드,콜백(성공여부,문서들)
         open fun selectDocuments(collection: String,field:String,keyword:String
                                 ,callBack:(success: Boolean,documents:List<DocumentSnapshot>?)->Unit)
@@ -129,9 +130,7 @@ open class FireStoreConnection {
                 .whereLessThan(field, keyword + "\uF8FF")
                 .get()
                 .addOnSuccessListener { result ->
-                    if (!result.isEmpty) {
                         callBack(true,result.documents)
-                    }
                 }
                 .addOnFailureListener {
                     callBack(false,null)

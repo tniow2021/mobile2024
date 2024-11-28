@@ -101,27 +101,17 @@ class CreatePostActivity : AppCompatActivity() {
         //post를 파이어스토어에 올림.
         FireStoreConnection.addDocument(boardPath+"/posts", post) { success, docPath ->
             if (success) {
-
-                //추가한 문서의 정보(제목과 문서경로)를
-                //상대경로/reference/postList 테이블에 저장해야
-                //게시글 목록을 불러올때 참고할 수 있음.
-
-                //postListItem= 게시글목록에 표시될 게시글의 정보
-                val postListItem = PostListItem.getPostListItem(post, docPath,Date().time)
-                FireStoreConnection.addDocument(
-                    boardPath + "/reference", postListItem
-                ) { success2, docId ->
-                    if (success2) {
-                        Toast.makeText(this, "게시글올리기 성공.", Toast.LENGTH_SHORT).show()
-                        finish()//게시가 완료되었으면 다시 돌아감.
-                    } else
-                        Toast.makeText(this, "게시글올리기 실패2.", Toast.LENGTH_SHORT).show()
-
-                }
-            } else {
-                Toast.makeText(this, "게시글올리기 실패.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "게시글올리기 성공.", Toast.LENGTH_SHORT).show()
+                finish()//게시가 완료되었으면 다시 돌아감.
             }
-
+            else{
+                Toast.makeText(this, "게시글올리기 실패.", Toast.LENGTH_SHORT).show()
+                //게시글 올리기를 실패했으면 앞서 스토리지에 올린 이미지를 삭제함
+                if(post.imagePath=="" ||post.imagePath==null){
+                    return@addDocument
+                }
+                FireStorageConnection.deleteFile(post.imagePath!!){}
+            }
         }
     }
 }
