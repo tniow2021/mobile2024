@@ -12,7 +12,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MobileProject"
+        android:theme="@style/Theme.FootBall"
         tools:targetApi="31" >
         <activity
             android:name=".footBall_damyeong.boardAndPost.boardSelectAndCreate.BoardCreateActivity"
@@ -39,7 +39,7 @@
             android:name=".footBall_damyeong.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.MobileProject" >
+            android:theme="@style/Theme.FootBall" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
