@@ -1,16 +1,13 @@
-package com.example.mobileproject.boardAndPost
+package com.example.FootBall.boardAndPost
 
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.MotionEvent
-import android.widget.ListAdapter
-import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.mobileproject.FireStoreConnection
-import com.example.mobileproject.R
-import com.example.mobileproject.databinding.ActivityBoardBinding
+import com.example.FootBall.FireStoreConnection
+import com.example.FootBall.R
+import com.example.FootBall.databinding.ActivityBoardBinding
 
 
 class BoardActivity : AppCompatActivity() {

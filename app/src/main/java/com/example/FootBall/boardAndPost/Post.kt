@@ -1,4 +1,4 @@
-package com.example.mobileproject.boardAndPost
+package com.example.FootBall.boardAndPost
 
 //매개변수 기본값으로 초기화를 안해주면 정체모를 오류나니 주의
 data class Post(

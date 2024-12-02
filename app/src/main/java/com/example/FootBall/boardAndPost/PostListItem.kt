@@ -1,6 +1,5 @@
-package com.example.mobileproject.boardAndPost
+package com.example.FootBall.boardAndPost
 
-import java.util.Date
 /*
     게시판(BoardActivity)에 들어가서 게시글 목록이 띄어질때
     리스트뷰에 각 항목의 데이터를 정의하는 클래스임

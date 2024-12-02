@@ -1,4 +1,4 @@
-package com.example.mobileproject.boardAndPost
+package com.example.FootBall.boardAndPost
 
 import android.net.Uri
 import android.os.Bundle
@@ -9,9 +9,9 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import com.example.mobileproject.FireStorageConnection
-import com.example.mobileproject.FireStoreConnection
-import com.example.mobileproject.databinding.ActivityCreatePostBinding
+import com.example.FootBall.FireStorageConnection
+import com.example.FootBall.FireStoreConnection
+import com.example.FootBall.databinding.ActivityCreatePostBinding
 import java.util.Date
 
 class CreatePostActivity : AppCompatActivity() {

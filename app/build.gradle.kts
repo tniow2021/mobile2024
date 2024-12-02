@@ -5,14 +5,14 @@ plugins {
 }
 
 android {
-    namespace = "com.example.mobileproject"
+    namespace = "com.example.FootBall"
     compileSdk = 35
 
     viewBinding{
         enable=true
     }
     defaultConfig {
-        applicationId = "com.example.mobileproject"
+        applicationId = "com.example.FootBall"
         minSdk = 24
         targetSdk = 34
         versionCode = 1

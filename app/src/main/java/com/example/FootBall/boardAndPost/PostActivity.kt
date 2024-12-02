@@ -1,17 +1,13 @@
-package com.example.mobileproject.boardAndPost
+package com.example.FootBall.boardAndPost
 
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.material3.surfaceColorAtElevation
-import com.bumptech.glide.Glide
-import com.example.mobileproject.FireStorageConnection
-import com.example.mobileproject.FireStoreConnection
-import com.example.mobileproject.databinding.ActivityPostBinding
-import com.google.firebase.storage.FirebaseStorage
+import com.example.FootBall.FireStorageConnection
+import com.example.FootBall.FireStoreConnection
+import com.example.FootBall.databinding.ActivityPostBinding
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale

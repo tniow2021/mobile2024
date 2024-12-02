@@ -1,4 +1,4 @@
-package com.example.mobileproject.boardAndPost.boardSelectAndCreate
+package com.example.FootBall.boardAndPost.boardSelectAndCreate
 
 import android.content.Context
 import android.util.Log
@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
-import com.example.mobileproject.FireStoreConnection
-import com.example.mobileproject.R
+import com.example.FootBall.FireStoreConnection
+import com.example.FootBall.R
 
 class BoardListAdapter
     (context: Context,

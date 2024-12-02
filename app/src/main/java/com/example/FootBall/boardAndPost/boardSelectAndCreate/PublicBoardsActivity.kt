@@ -1,14 +1,14 @@
-package com.example.mobileproject.boardAndPost.boardSelectAndCreate
+package com.example.FootBall.boardAndPost.boardSelectAndCreate
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ListView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import com.example.mobileproject.FireStoreConnection
-import com.example.mobileproject.R
-import com.example.mobileproject.boardAndPost.BoardActivity
-import com.example.mobileproject.databinding.ActivityPublicBoardsBinding
+import com.example.FootBall.FireStoreConnection
+import com.example.FootBall.R
+import com.example.FootBall.boardAndPost.BoardActivity
+import com.example.FootBall.databinding.ActivityPublicBoardsBinding
 
 class PublicBoardsActivity : AppCompatActivity() {
     private val boardList= ArrayList<BoardListItem>()

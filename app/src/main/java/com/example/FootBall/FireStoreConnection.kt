@@ -1,9 +1,7 @@
-package com.example.mobileproject
+package com.example.FootBall
 
 import android.util.Log
-import android.widget.Toast
 import com.google.firebase.firestore.AggregateSource
-import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 

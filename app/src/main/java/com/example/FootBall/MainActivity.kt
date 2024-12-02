@@ -1,13 +1,14 @@
-package com.example.mobileproject
+package com.example.FootBall
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.mobileproject.boardAndPost.*
-import com.example.mobileproject.boardAndPost.boardSelectAndCreate.BoardCreateActivity
-import com.example.mobileproject.boardAndPost.boardSelectAndCreate.PublicBoardsActivity
-import com.example.mobileproject.boardAndPost.boardSelectAndCreate.UserBoardsActivity
-import com.example.mobileproject.databinding.ActivityMainBinding
+import com.example.FootBall.boardAndPost.*
+import com.example.FootBall.boardAndPost.boardSelectAndCreate.BoardCreateActivity
+import com.example.FootBall.boardAndPost.boardSelectAndCreate.PublicBoardsActivity
+import com.example.FootBall.boardAndPost.boardSelectAndCreate.UserBoardsActivity
+import com.example.FootBall.databinding.ActivityMainBinding
+
 /*
 project structure에서 안드로이드 API를 35로 설정
 파이어베이스 연동 안되있으면 tools에서 firebase에서 FireStore랑 FireStorage 연동 및 sdk다운받기

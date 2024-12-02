@@ -1,4 +1,4 @@
-package com.example.mobileproject
+package com.example.FootBall
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
