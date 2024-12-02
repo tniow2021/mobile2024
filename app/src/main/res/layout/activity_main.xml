@@ -14,21 +14,5 @@
         android:layout_height="wrap_content"
         android:text="유저게시판모음"
         android:id="@+id/main_goUserBoards"/>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="게시판만들기"
-        android:id="@+id/main_goCreateBoard"/>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="게시판 가기"
-        android:id="@+id/main_goBoardBtn"/>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="게시글 쓰기"
-        android:id="@+id/main_createPost"/>
 
 </LinearLayout>

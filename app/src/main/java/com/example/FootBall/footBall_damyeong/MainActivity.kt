@@ -49,10 +49,12 @@ class MainActivity : AppCompatActivity() {
             startActivity(myintent)
         }
         //메인화면에 있는 '게시판 만들기' 버튼
-        binding.mainGoCreateBoard.setOnClickListener{
+        /*binding.mainGoCreateBoard.setOnClickListener{
             var myintent= Intent(applicationContext, BoardCreateActivity::class.java)
             startActivity(myintent)
         }
+
+         */
         /*
         //메인화면에 있는 '게시판 가기' 버튼
         binding.mainGoBoardBtn.setOnClickListener{

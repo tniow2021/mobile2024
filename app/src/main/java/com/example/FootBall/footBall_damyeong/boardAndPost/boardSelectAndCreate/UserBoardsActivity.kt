@@ -47,6 +47,7 @@ class UserBoardsActivity : AppCompatActivity() {
         val searchButton=binding.userBoardsSearchButtun
         val searchEditText=binding.userBoardsEditText
         val deleteButton=binding.userBoardsDeleteButtun
+        val createButton=binding.userBoardsCreateButtun
 
         //어댑터 만들기
         adapter = BoardListAdapter(this, R.layout.item_board_preview,
@@ -145,6 +146,12 @@ class UserBoardsActivity : AppCompatActivity() {
             // 다이얼로그 크기 조정 (중앙에 띄우기)
             val layoutParams = dialog.window?.attributes
             dialog.window?.attributes = layoutParams
+        }
+
+
+        createButton.setOnClickListener{
+            var myintent= Intent(applicationContext, BoardCreateActivity::class.java)
+            startActivity(myintent)
         }
 
     }
