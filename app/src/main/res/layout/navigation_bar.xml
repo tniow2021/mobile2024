@@ -1,0 +1,32 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="#222232"
+    android:padding="16dp"
+    android:gravity="center"
+    android:layout_gravity="center" >
+
+    <!-- TeamListActivity로 이동 -->
+    <Button
+        android:id="@+id/btn_team_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#464964"
+        android:textColor="#FFFFFF"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="팀 정보" />
+
+    <!-- MyProfileActivity로 이동 -->
+    <Button
+        android:id="@+id/btn_my_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#464964"
+        android:textColor="#FFFFFF"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="프로필" />
+</LinearLayout>

@@ -9,8 +9,8 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import com.example.FootBall.footBall_damyeong.FireStorageConnection
-import com.example.FootBall.footBall_damyeong.FireStoreConnection
+import com.example.FootBall.FireStorageConnection
+import com.example.FootBall.FireStoreConnection
 import com.example.FootBall.databinding.ActivityCreatePostBinding
 import java.util.Date
 

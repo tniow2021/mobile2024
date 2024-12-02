@@ -5,8 +5,8 @@ import android.util.Log
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.FootBall.footBall_damyeong.FireStorageConnection
-import com.example.FootBall.footBall_damyeong.FireStoreConnection
+import com.example.FootBall.FireStorageConnection
+import com.example.FootBall.FireStoreConnection
 import com.example.FootBall.databinding.ActivityPostBinding
 import java.text.SimpleDateFormat
 import java.util.Date

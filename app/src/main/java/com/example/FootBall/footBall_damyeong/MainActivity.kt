@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.FootBall.footBall_damyeong.boardAndPost.boardSelectAndCreate.BoardCreateActivity
 import com.example.FootBall.footBall_damyeong.boardAndPost.boardSelectAndCreate.PublicBoardsActivity
 import com.example.FootBall.footBall_damyeong.boardAndPost.boardSelectAndCreate.UserBoardsActivity
-import com.example.FootBall.databinding.ActivityMainBinding
 
 /*
 project structure에서 안드로이드 API를 35로 설정
@@ -31,6 +30,7 @@ project structure에서 안드로이드 API를 35로 설정
 공통게시판 게시글에 올라간 사진들: publicBoards/게시판이름/
 유저게시판 게시글에 올라간 사진들: userBoards/게시판이름/
  */
+/*
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         val binding= ActivityMainBinding.inflate(layoutInflater)
@@ -76,3 +76,5 @@ class MainActivity : AppCompatActivity() {
 
     }
 }
+
+ */

@@ -1,4 +1,4 @@
-package com.example.FootBall.footBall_damyeong
+package com.example.FootBall
 
 import android.util.Log
 import com.google.firebase.firestore.AggregateSource
