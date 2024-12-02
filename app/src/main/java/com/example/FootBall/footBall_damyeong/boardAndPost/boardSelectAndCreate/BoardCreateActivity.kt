@@ -1,4 +1,4 @@
-package com.example.FootBall.boardAndPost.boardSelectAndCreate
+package com.example.FootBall.footBall_damyeong.boardAndPost.boardSelectAndCreate
 
 import android.os.Bundle
 import android.util.Log
@@ -6,7 +6,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import com.example.FootBall.FireStoreConnection
+import com.example.FootBall.footBall_damyeong.FireStoreConnection
 import com.example.FootBall.databinding.ActivityBoardCreateBinding
 
 class BoardCreateActivity : AppCompatActivity() {
@@ -46,7 +46,7 @@ class BoardCreateActivity : AppCompatActivity() {
                 {
                     Log.d("BoardCreateActivity","3")
                     //게시판 정보를 담은 boardListItem을 만든뒤 파이어스토어에 올림.
-                    var boardListItem=BoardListItem(name,explanation)
+                    var boardListItem= BoardListItem(name,explanation)
                     FireStoreConnection.setDocument("userBoards/"+name,boardListItem)
                     {
                         success, docPath ->

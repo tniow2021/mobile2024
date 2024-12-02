@@ -1,4 +1,4 @@
-package com.example.FootBall.boardAndPost.boardSelectAndCreate
+package com.example.FootBall.footBall_damyeong.boardAndPost.boardSelectAndCreate
 
 import android.content.Context
 import android.util.Log
@@ -7,14 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
-import com.example.FootBall.FireStoreConnection
+import com.example.FootBall.footBall_damyeong.FireStoreConnection
 import com.example.FootBall.R
 
 class BoardListAdapter
     (context: Context,
      private val resource: Int,
      private val boardList: List<BoardListItem>,
-            private val rootPath:String)
+     private val rootPath:String)
     :ArrayAdapter<BoardListItem>(context, resource, boardList)
 {
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {

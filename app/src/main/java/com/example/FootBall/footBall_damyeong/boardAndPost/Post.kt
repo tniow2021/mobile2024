@@ -1,4 +1,4 @@
-package com.example.FootBall.boardAndPost
+package com.example.FootBall.footBall_damyeong.boardAndPost
 
 //매개변수 기본값으로 초기화를 안해주면 정체모를 오류나니 주의
 data class Post(

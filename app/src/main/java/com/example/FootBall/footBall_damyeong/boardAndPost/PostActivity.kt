@@ -1,12 +1,12 @@
-package com.example.FootBall.boardAndPost
+package com.example.FootBall.footBall_damyeong.boardAndPost
 
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.FootBall.FireStorageConnection
-import com.example.FootBall.FireStoreConnection
+import com.example.FootBall.footBall_damyeong.FireStorageConnection
+import com.example.FootBall.footBall_damyeong.FireStoreConnection
 import com.example.FootBall.databinding.ActivityPostBinding
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -26,7 +26,7 @@ class PostActivity : AppCompatActivity() {
         val postContent = binding.postContent
         val postImage = binding.postImageView
 
-        var post:Post?=null
+        var post: Post?=null
 
         // 인텐트를 통해 받은 데이터 표시
         val postPath = intent.getStringExtra("postPath")

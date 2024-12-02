@@ -1,4 +1,4 @@
-package com.example.FootBall.boardAndPost.boardSelectAndCreate
+package com.example.FootBall.footBall_damyeong.boardAndPost.boardSelectAndCreate
 
 import android.app.AlertDialog
 import android.content.Intent
@@ -11,10 +11,10 @@ import android.widget.ListView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import com.example.FootBall.FireStorageConnection
-import com.example.FootBall.FireStoreConnection
+import com.example.FootBall.footBall_damyeong.FireStorageConnection
+import com.example.FootBall.footBall_damyeong.FireStoreConnection
 import com.example.FootBall.R
-import com.example.FootBall.boardAndPost.BoardActivity
+import com.example.FootBall.footBall_damyeong.boardAndPost.BoardActivity
 import com.example.FootBall.databinding.ActivityUserBoardsBinding
 
 class UserBoardsActivity : AppCompatActivity() {

@@ -15,28 +15,28 @@
         android:theme="@style/Theme.MobileProject"
         tools:targetApi="31" >
         <activity
-            android:name=".boardAndPost.boardSelectAndCreate.BoardCreateActivity"
+            android:name=".footBall_damyeong.boardAndPost.boardSelectAndCreate.BoardCreateActivity"
             android:exported="false" />
         <activity
-            android:name=".boardAndPost.boardSelectAndCreate.UserBoardsActivity"
+            android:name=".footBall_damyeong.boardAndPost.boardSelectAndCreate.UserBoardsActivity"
             android:exported="false" />
         <activity
-            android:name=".boardAndPost.boardSelectAndCreate.PublicBoardsActivity"
+            android:name=".footBall_damyeong.boardAndPost.boardSelectAndCreate.PublicBoardsActivity"
             android:exported="false" />
         <activity
-            android:name=".boardAndPost.PostActivity"
+            android:name=".footBall_damyeong.boardAndPost.PostActivity"
             android:exported="false" />
         <activity
-            android:name=".boardAndPost.Post"
+            android:name=".footBall_damyeong.boardAndPost.Post"
             android:exported="false" />
         <activity
-            android:name=".boardAndPost.BoardActivity"
+            android:name=".footBall_damyeong.boardAndPost.BoardActivity"
             android:exported="false" />
         <activity
-            android:name=".boardAndPost.CreatePostActivity"
+            android:name=".footBall_damyeong.boardAndPost.CreatePostActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".footBall_damyeong.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.MobileProject" >

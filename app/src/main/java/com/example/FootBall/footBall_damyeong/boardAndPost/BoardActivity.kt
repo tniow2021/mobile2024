@@ -1,11 +1,11 @@
-package com.example.FootBall.boardAndPost
+package com.example.FootBall.footBall_damyeong.boardAndPost
 
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.FootBall.FireStoreConnection
+import com.example.FootBall.footBall_damyeong.FireStoreConnection
 import com.example.FootBall.R
 import com.example.FootBall.databinding.ActivityBoardBinding
 
@@ -15,7 +15,7 @@ class BoardActivity : AppCompatActivity() {
     private var boardPath:String?=""
     private var boardName:String?=""
     private val postList= ArrayList<PostListItem>()
-    private lateinit var adapter:PostListAdapter
+    private lateinit var adapter: PostListAdapter
     private fun refresh()
     {
         FireStoreConnection.onGetCollection(boardPath + "/posts") {
@@ -25,7 +25,11 @@ class BoardActivity : AppCompatActivity() {
 
                 val post = document.toObject(Post::class.java)
                 if (post != null){
-                    val postListItem=PostListItem.getPostListItem(post,document.reference.path.toString(),post.timestamp)
+                    val postListItem= PostListItem.getPostListItem(
+                        post,
+                        document.reference.path.toString(),
+                        post.timestamp
+                    )
                     postList.add(postListItem)
                 }
 
@@ -105,7 +109,11 @@ class BoardActivity : AppCompatActivity() {
                             if (post != null){
                                 //boardPath로 불러온 문서는 Post클래스이기 때문에 리스트뷰에 출력하기위해
                                 //PostListItem으로 변환해주는 귀찮은 일을 해줌.
-                                val postlistItem=PostListItem.getPostListItem(post!!,document.reference.path.toString(),post!!.timestamp)
+                                val postlistItem= PostListItem.getPostListItem(
+                                    post!!,
+                                    document.reference.path.toString(),
+                                    post!!.timestamp
+                                )
                                 postList.add(postlistItem)
                             }
                         }

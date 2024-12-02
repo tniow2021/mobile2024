@@ -1,13 +1,13 @@
-package com.example.FootBall.boardAndPost.boardSelectAndCreate
+package com.example.FootBall.footBall_damyeong.boardAndPost.boardSelectAndCreate
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ListView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import com.example.FootBall.FireStoreConnection
+import com.example.FootBall.footBall_damyeong.FireStoreConnection
 import com.example.FootBall.R
-import com.example.FootBall.boardAndPost.BoardActivity
+import com.example.FootBall.footBall_damyeong.boardAndPost.BoardActivity
 import com.example.FootBall.databinding.ActivityPublicBoardsBinding
 
 class PublicBoardsActivity : AppCompatActivity() {

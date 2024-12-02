@@ -1,12 +1,11 @@
-package com.example.FootBall
+package com.example.FootBall.footBall_damyeong
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.FootBall.boardAndPost.*
-import com.example.FootBall.boardAndPost.boardSelectAndCreate.BoardCreateActivity
-import com.example.FootBall.boardAndPost.boardSelectAndCreate.PublicBoardsActivity
-import com.example.FootBall.boardAndPost.boardSelectAndCreate.UserBoardsActivity
+import com.example.FootBall.footBall_damyeong.boardAndPost.boardSelectAndCreate.BoardCreateActivity
+import com.example.FootBall.footBall_damyeong.boardAndPost.boardSelectAndCreate.PublicBoardsActivity
+import com.example.FootBall.footBall_damyeong.boardAndPost.boardSelectAndCreate.UserBoardsActivity
 import com.example.FootBall.databinding.ActivityMainBinding
 
 /*
