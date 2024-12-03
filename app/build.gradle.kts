@@ -85,4 +85,6 @@ dependencies {
     //이미지 불러오는 라이브러리
     implementation ("com.github.bumptech.glide:glide:4.15.1")  // Glide 의존성 추가
     annotationProcessor ("com.github.bumptech.glide:compiler:4.15.1")
+
+    implementation ("com.github.yalantis:ucrop:2.2.8")
 }
