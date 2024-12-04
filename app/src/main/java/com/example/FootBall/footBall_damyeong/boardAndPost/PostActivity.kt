@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.FootBall.FireStorageConnection
 import com.example.FootBall.FireStoreConnection
 import com.example.FootBall.databinding.ActivityPostBinding
+import com.example.FootBall.football_minjae.MyApplication
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -70,6 +71,14 @@ class PostActivity : AppCompatActivity() {
 
         //게시글 삭제버튼
         deleteButton.setOnClickListener{
+            val app = application as MyApplication
+            val user = app.currentUser
+            //현재사용자 이메일과 작성자 이메일이 다르면 빠꾸
+            if(!(user!!.email.equals(post!!.author)))
+            {
+                Toast.makeText(this,"이 글을 작성한 작성자만 삭제할 수 있습니다.",Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
             //그냥 바로 게시글 삭제하기  (나중에 이곳에 사용자 인증코드 추가)
             FireStoreConnection.documentDelete(postPath){
                 success ->

@@ -13,15 +13,6 @@
         android:textSize="18sp"
         android:padding="8dp" />
 
-    <!-- 작성자 입력 필드 -->
-    <EditText
-        android:id="@+id/authorEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="작성자"
-        android:padding="8dp"
-        android:textSize="16sp" />
-
     <!-- 내용 입력 필드 -->
     <EditText
         android:id="@+id/contentEditText"

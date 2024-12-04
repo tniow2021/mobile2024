@@ -12,12 +12,13 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.FootBall.FireStorageConnection
 import com.example.FootBall.FireStoreConnection
 import com.example.FootBall.databinding.ActivityCreatePostBinding
+import com.example.FootBall.football_minjae.MyApplication
 import java.util.Date
 
 class CreatePostActivity : AppCompatActivity() {
     private lateinit var titleEditText: EditText
     private lateinit var contentEditText: EditText
-    private lateinit var authorEditText: EditText
+    //private lateinit var authorEditText: EditText
     private lateinit var imageView: ImageView
     private lateinit var selectImageButton: Button
     private lateinit var uploadButton: Button
@@ -33,7 +34,7 @@ class CreatePostActivity : AppCompatActivity() {
 
         titleEditText = binding.titleEditText
         contentEditText = binding.contentEditText
-        authorEditText = binding.authorEditText
+        //authorEditText = binding.authorEditText
         imageView = binding.postCreateImageView
         selectImageButton = binding.selectImageButton
         uploadButton = binding.uploadButton
@@ -65,9 +66,13 @@ class CreatePostActivity : AppCompatActivity() {
 
     private fun uploadPost()
     {
+        val app = application as MyApplication
+        val user = app.currentUser
+
         val post= Post(
             title = titleEditText.text.toString() ?:"",
-            author = authorEditText.text.toString() ?:"",
+            //author = authorEditText.text.toString() ?:"",
+            author=user!!.email,
             content = contentEditText.text.toString() ?:"",
             timestamp = Date().time,//얘는 로컬시간이라 나중에 서버시간으로 바꿔야함.
             imagePath=null
