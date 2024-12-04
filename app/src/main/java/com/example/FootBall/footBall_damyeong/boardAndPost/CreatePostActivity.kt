@@ -71,8 +71,8 @@ class CreatePostActivity : AppCompatActivity() {
 
         val post= Post(
             title = titleEditText.text.toString() ?:"",
-            //author = authorEditText.text.toString() ?:"",
-            author=user!!.email,
+            author = user!!.name,
+            email =user!!.email,
             content = contentEditText.text.toString() ?:"",
             timestamp = Date().time,//얘는 로컬시간이라 나중에 서버시간으로 바꿔야함.
             imagePath=null

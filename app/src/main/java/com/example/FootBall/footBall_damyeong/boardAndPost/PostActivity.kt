@@ -27,8 +27,10 @@ class PostActivity : AppCompatActivity() {
         val postContent = binding.postContent
         val postImage = binding.postImageView
 
-        var post: Post?=null
+        //인텐트대신 전역변수를 통해서 전달받음.
+        var postRef: BoardActivity.PostRef =BoardActivity.postRef
 
+        /*
         // 인텐트를 통해 받은 데이터 표시
         val postPath = intent.getStringExtra("postPath")
         // 받은 게시글 경로가 null이면 종료.
@@ -69,18 +71,44 @@ class PostActivity : AppCompatActivity() {
                 postImage.visibility = ImageView.INVISIBLE
         }
 
+         */
+
+        val post:Post=postRef.post
+        postTitle.text =post.title ?: ""
+        postDate.text = post.title ?: ""
+        postAuther.text = "작성자 : "+post.author ?: ""
+        postContent.text = post.content ?: ""
+        // postListItem안에 있는 Timestamp를 date로 변환해 표기하기
+        val date = Date(post.timestamp ?: 0)
+        // 날짜 포맷 설정
+        //val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+        val dateFormat = SimpleDateFormat("yyyy년 MM월 dd일 HH:mm:ss", Locale.getDefault())
+        val formattedDate = dateFormat.format(date)
+        postDate.text = formattedDate
+
+
+        //화면에 이미지 띄우기
+        if(post.imagePath != null)
+        {
+            FireStorageConnection.bindImageByPath(this,post.imagePath!!,postImage)
+        }
+        else
+        //이미지가 없으면 이미지뷰를 안보이게한다.
+            postImage.visibility = ImageView.INVISIBLE
+
+
         //게시글 삭제버튼
         deleteButton.setOnClickListener{
             val app = application as MyApplication
             val user = app.currentUser
             //현재사용자 이메일과 작성자 이메일이 다르면 빠꾸
-            if(!(user!!.email.equals(post!!.author)))
+            if(!(user!!.email.equals(post!!.email)))
             {
                 Toast.makeText(this,"이 글을 작성한 작성자만 삭제할 수 있습니다.",Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             //그냥 바로 게시글 삭제하기  (나중에 이곳에 사용자 인증코드 추가)
-            FireStoreConnection.documentDelete(postPath){
+            FireStoreConnection.documentDelete(postRef.postPath){
                 success ->
                 if(success){//현재문서 삭제에 성공했다면
                     //이미지 문서가 없는 경우엔 바로 게시글 삭제완료처리

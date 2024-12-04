@@ -14,29 +14,33 @@ class BoardActivity : AppCompatActivity() {
 
     private var boardPath:String?=""
     private var boardName:String?=""
-    private val postList= ArrayList<PostListItem>()
+    private val postList=ArrayList<PostRef>()
+    private val postItemList=ArrayList<PostRef>()
     private lateinit var adapter: PostListAdapter
     private fun refresh()
     {
         FireStoreConnection.onGetCollection(boardPath + "/posts") {
             documents ->
             postList.clear()
+            postItemList.clear()
             for (document in documents) {
 
                 val post = document.toObject(Post::class.java)
                 if (post != null){
-                    val postListItem= PostListItem.getPostListItem(
-                        post,
-                        document.reference.path.toString(),
-                        post.timestamp
-                    )
-                    postList.add(postListItem)
+                    postList.add(PostRef(post,document.reference.path))
+                    postItemList.add(PostRef(post,document.reference.path))
                 }
-
 
             }
             adapter.notifyDataSetChanged()
         }
+    }
+    companion object
+    {
+        var postRef:PostRef=PostRef(Post(),"")
+    }
+    class PostRef(var post:Post,var postPath:String)
+    {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,17 +62,17 @@ class BoardActivity : AppCompatActivity() {
         //보드이름을 화면에 띄우기
         title.text=boardName+" 게시판"
         //어댑터 만들기
-        adapter = PostListAdapter(this, R.layout.item_post_preview, postList)
+        adapter = PostListAdapter(this, R.layout.item_post_preview, postItemList)
         listView.adapter = adapter;//이 줄에서 리스틉 뷰에 게시글 목록이 출력됨.
 
         // 리스트 아이템 클릭 시 게시글 화면으로 이동
         listView.setOnItemClickListener { _, _, position, _ ->
             // 클릭된 게시글 객체ㄹ
-            val selectedPost = postList[position]
+            val selectedPost = postItemList[position]
             // 게시글 화면으로 이동
             val myintent = Intent(applicationContext, PostActivity::class.java)
-            //액티비티간 매개변수는 게시글경로
-            myintent.putExtra("postPath", selectedPost.postPath)
+            //인텐르로 안보내고 전역에 복사해서 전달함.
+            BoardActivity.postRef=selectedPost
             startActivity(myintent)
         }
         //현재 보드의 모든 게시글 정보가져오기
@@ -95,6 +99,23 @@ class BoardActivity : AppCompatActivity() {
             }
             else//검색
             {
+                //기존에 받아온 post 리스트에서 문자열을 검색한다.
+                postItemList.clear()
+                for(postRef in postList){
+                    if (postRef.post.content.contains(searchTxt, ignoreCase = true))
+                    {
+                        postItemList.add(postRef)
+                    }
+                    else if(postRef.post.title.contains(searchTxt, ignoreCase = true))
+                    {
+                        postItemList.add(postRef)
+                    }
+                }
+                adapter.notifyDataSetChanged()
+                if(postItemList.size==0){
+                    Toast.makeText(this,"검색된 내용이 없습니다.",Toast.LENGTH_SHORT).show()
+                }
+                /*
                 Log.d("BoardActivity","searchButton"+boardPath!!+"/posts");
                 FireStoreConnection.selectDocuments(boardPath!!+"/posts/",
                     "auther",searchTxt)
@@ -102,7 +123,7 @@ class BoardActivity : AppCompatActivity() {
                     success, documents ->
                     if(success){//검색해서 문서들이 받아와졌으면
                         Log.d("BoardActivity","searchButton2");
-                        postList.clear()
+                        postListItemList.clear()
                         for (document in documents!!) {
                             val post = document.toObject(Post::class.java)
                             Log.d("BoardActivity",post!!.content);
@@ -114,12 +135,12 @@ class BoardActivity : AppCompatActivity() {
                                     document.reference.path.toString(),
                                     post!!.timestamp
                                 )
-                                postList.add(postlistItem)
+                                postListItemList.add(postlistItem)
                             }
                         }
                         Log.d("BoardActivity","searchButton3");
                         adapter.notifyDataSetChanged()
-                        if(postList.count()==0){
+                        if(postListItemList.count()==0){
                             Toast.makeText(this,"검색된 내용이 없습니다.",Toast.LENGTH_SHORT).show()
                         }
                     }
@@ -127,11 +148,18 @@ class BoardActivity : AppCompatActivity() {
                         Toast.makeText(this,"검색된 내용이 없습니다2.",Toast.LENGTH_SHORT).show()
                     }
                 }
+
+                 */
             }
 
             
         }
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        adapter.notifyDataSetChanged()
     }
 }
 
